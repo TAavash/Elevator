@@ -27,7 +27,7 @@ namespace Elevator
             dataGridViewLogs.ColumnCount = 2;
 
             dataGridViewLogs.Columns[0].Name = "Time";
-            dataGridViewLogs.Columns[1].Name = "Evets";
+            dataGridViewLogs.Columns[1].Name = "Events";
 
             dt.Columns.Add("Time");
             dt.Columns.Add("Events");
@@ -41,6 +41,7 @@ namespace Elevator
 
             InsertLogsIntoDB(dt);
         }
+
 
         private void InsertLogsIntoDB(DataTable dt)
         {
@@ -67,9 +68,42 @@ namespace Elevator
             }
         }
 
+        private void loadLogsFromDB()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectString))
+                {
+                    string query = @"Select LogTIme, EventDescription from liftRecord order by LogTIme desc";
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
+                    {
+                        dt.Rows.Clear();
+
+                        adapter.Fill(dt);
+
+                        dataGridViewLogs.Rows.Clear();
+
+                        foreach(DataRow row in dt.Rows)
+                        {
+                            string currentTime = Convert.ToDateTime(row["LogTIme"]).ToString("hh:mm:ss");
+                            string events = row["EventDescription"].ToString();
+
+                            dataGridViewLogs.Rows.Add(currentTime, events);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading record from DB: ", ex.Message);
+            }
+
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            loadLogsFromDB();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -81,7 +115,7 @@ namespace Elevator
         {
 
             if (isDoorOpen) {
-                logEvents("Cannot move up, the damn door is open!");
+                logEvents("Cannot move up, the damn door is still open!");
                 return;
             }
 
@@ -135,7 +169,7 @@ namespace Elevator
         {
             if (isDoorOpen)
             {
-                logEvents("Cannot move down; the damn door is open!");
+                logEvents("Cannot move down; the damn door is still open!");
                 return;
             }
 
@@ -181,11 +215,18 @@ namespace Elevator
 
         private void button4_Click(object sender, EventArgs e)
         {
-            isOpening = true;
-            isClosing = false;
-            timer2.Start();
-            closeBtn.Enabled = false;
-            logEvents("Lift khulyo bhitra jamm !!");
+            if (isDoorOpen)
+            {
+                logEvents("Lift is already opened!");
+            }
+            else
+            {
+                isOpening = true;
+                isClosing = false;
+                timer2.Start();
+                closeBtn.Enabled = false;
+                logEvents("Lift khulyo get in or get lost !!");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -196,7 +237,7 @@ namespace Elevator
                 isClosing = true;
                 timer2.Start();
                 openBtn.Enabled = false;
-                logEvents("Lift banda don't move !!");
+                logEvents("Lift banda hudaixa, don't move !!");
             }
             else
             {

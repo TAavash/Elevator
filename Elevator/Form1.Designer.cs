@@ -166,11 +166,13 @@
             // 
             // dataGridViewLogs
             // 
+            dataGridViewLogs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridViewLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewLogs.Location = new Point(479, 48);
+            dataGridViewLogs.Location = new Point(479, 0);
             dataGridViewLogs.Name = "dataGridViewLogs";
             dataGridViewLogs.RowHeadersWidth = 51;
-            dataGridViewLogs.Size = new Size(300, 362);
+            dataGridViewLogs.Size = new Size(318, 450);
             dataGridViewLogs.TabIndex = 10;
             dataGridViewLogs.CellContentClick += dataGridViewLogs_CellContentClick;
             // 
