@@ -42,6 +42,7 @@
             rightDoor_T = new PictureBox();
             timer2 = new System.Windows.Forms.Timer(components);
             dataGridViewLogs = new DataGridView();
+            ClearAll = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)rightDoor_G).BeginInit();
@@ -66,7 +67,7 @@
             // 
             button1.BackgroundImage = Properties.Resources.Screenshot_2024_10_18_074020;
             button1.BackgroundImageLayout = ImageLayout.Stretch;
-            button1.Location = new Point(314, 109);
+            button1.Location = new Point(319, 85);
             button1.Name = "button1";
             button1.Size = new Size(78, 66);
             button1.TabIndex = 1;
@@ -77,7 +78,7 @@
             // 
             button2.BackgroundImage = Properties.Resources.Screenshot_2024_10_18_080230;
             button2.BackgroundImageLayout = ImageLayout.Stretch;
-            button2.Location = new Point(314, 181);
+            button2.Location = new Point(319, 157);
             button2.Name = "button2";
             button2.Size = new Size(78, 64);
             button2.TabIndex = 2;
@@ -88,7 +89,7 @@
             // 
             closeBtn.BackgroundImage = Properties.Resources.Screenshot_2024_10_18_074100;
             closeBtn.BackgroundImageLayout = ImageLayout.Stretch;
-            closeBtn.Location = new Point(270, 265);
+            closeBtn.Location = new Point(270, 237);
             closeBtn.Name = "closeBtn";
             closeBtn.Size = new Size(75, 69);
             closeBtn.TabIndex = 3;
@@ -99,7 +100,7 @@
             // 
             openBtn.BackgroundImage = Properties.Resources.Screenshot_2024_10_18_074114;
             openBtn.BackgroundImageLayout = ImageLayout.Stretch;
-            openBtn.Location = new Point(367, 265);
+            openBtn.Location = new Point(367, 237);
             openBtn.Name = "openBtn";
             openBtn.Size = new Size(79, 69);
             openBtn.TabIndex = 4;
@@ -176,11 +177,25 @@
             dataGridViewLogs.TabIndex = 10;
             dataGridViewLogs.CellContentClick += dataGridViewLogs_CellContentClick;
             // 
+            // ClearAll
+            // 
+            ClearAll.BackgroundImage = Properties.Resources.sharingan;
+            ClearAll.BackgroundImageLayout = ImageLayout.Stretch;
+            ClearAll.ForeColor = SystemColors.ButtonHighlight;
+            ClearAll.Location = new Point(319, 312);
+            ClearAll.Name = "ClearAll";
+            ClearAll.Size = new Size(78, 78);
+            ClearAll.TabIndex = 11;
+            ClearAll.Text = "Shut Down";
+            ClearAll.UseVisualStyleBackColor = true;
+            ClearAll.Click += ClearAll_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(ClearAll);
             Controls.Add(dataGridViewLogs);
             Controls.Add(rightDoor_T);
             Controls.Add(leftDoor_T);
@@ -220,5 +235,6 @@
         private PictureBox rightDoor_T;
         private System.Windows.Forms.Timer timer2;
         private DataGridView dataGridViewLogs;
+        private Button ClearAll;
     }
 }

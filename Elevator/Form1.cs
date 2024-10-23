@@ -16,14 +16,14 @@ namespace Elevator
 
         bool isDoorOpen = false;
 
-        string connectString = @"Server = AAVASHT; Database = Lift; Trusted_Connection = True";
-
         DataTable dt = new DataTable();
+
+        DBcontext DBcontext = new DBcontext();
 
         public Form1()
         {
             InitializeComponent();
-            doorMaxOpenWidth = pictureBox1.Width / 2 ;
+            doorMaxOpenWidth = pictureBox1.Width / 2;
             dataGridViewLogs.ColumnCount = 2;
 
             dataGridViewLogs.Columns[0].Name = "Time";
@@ -39,71 +39,12 @@ namespace Elevator
             dt.Rows.Add(currentTime, message);
             dataGridViewLogs.Rows.Add(currentTime, message);
 
-            InsertLogsIntoDB(dt);
-        }
-
-
-        private void InsertLogsIntoDB(DataTable dt)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectString))
-                {
-                    string query = @"Insert into liftRecord(LogTIme, EventDescription) values(@Time, @Logs)";
-                    using (SqlDataAdapter adapter = new SqlDataAdapter())
-                    {
-                        adapter.InsertCommand = new SqlCommand(query, conn);
-                        adapter.InsertCommand.Parameters.Add("@Time", SqlDbType.DateTime, 0, "Time");
-                        adapter.InsertCommand.Parameters.Add("@Logs", SqlDbType.NVarChar, 255, "Events");
-
-                        conn.Open();
-
-                        adapter.Update(dt);
-                    }
-                }
-            }
-
-            catch (Exception ex) {
-                MessageBox.Show("Error while saving", ex.Message);
-            }
-        }
-
-        private void loadLogsFromDB()
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectString))
-                {
-                    string query = @"Select LogTIme, EventDescription from liftRecord order by LogTIme desc";
-
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(query, conn))
-                    {
-                        dt.Rows.Clear();
-
-                        adapter.Fill(dt);
-
-                        dataGridViewLogs.Rows.Clear();
-
-                        foreach(DataRow row in dt.Rows)
-                        {
-                            string currentTime = Convert.ToDateTime(row["LogTIme"]).ToString("hh:mm:ss");
-                            string events = row["EventDescription"].ToString();
-
-                            dataGridViewLogs.Rows.Add(currentTime, events);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error loading record from DB: ", ex.Message);
-            }
-
+            DBcontext.InsertLogsIntoDB(dt);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            loadLogsFromDB();
+            DBcontext.loadLogsFromDB(dt, dataGridViewLogs);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -114,7 +55,8 @@ namespace Elevator
         private void button1_Click(object sender, EventArgs e)
         {
 
-            if (isDoorOpen) {
+            if (isDoorOpen)
+            {
                 logEvents("Cannot move up, the damn door is still open!");
                 return;
             }
@@ -248,7 +190,8 @@ namespace Elevator
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (pictureBox1.Top != 0) {
+            if (pictureBox1.Top != 0)
+            {
 
                 if (isOpening)
                 {
@@ -326,6 +269,11 @@ namespace Elevator
         private void dataGridViewLogs_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void ClearAll_Click(object sender, EventArgs e)
+        {
+            DBcontext.TruncateLogs(dt, dataGridViewLogs);
         }
     }
 }
