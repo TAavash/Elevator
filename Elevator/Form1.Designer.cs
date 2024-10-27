@@ -43,6 +43,8 @@
             timer2 = new System.Windows.Forms.Timer(components);
             dataGridViewLogs = new DataGridView();
             ClearAll = new Button();
+            pictureBox3 = new PictureBox();
+            pictureBox4 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)rightDoor_G).BeginInit();
@@ -50,6 +52,8 @@
             ((System.ComponentModel.ISupportInitialize)leftDoor_T).BeginInit();
             ((System.ComponentModel.ISupportInitialize)rightDoor_T).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLogs).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -170,7 +174,7 @@
             dataGridViewLogs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewLogs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewLogs.Location = new Point(479, 0);
+            dataGridViewLogs.Location = new Point(482, 0);
             dataGridViewLogs.Name = "dataGridViewLogs";
             dataGridViewLogs.RowHeadersWidth = 51;
             dataGridViewLogs.Size = new Size(318, 450);
@@ -190,6 +194,27 @@
             ClearAll.UseVisualStyleBackColor = true;
             ClearAll.Click += ClearAll_Click;
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackgroundImage = Properties.Resources.wall;
+            pictureBox3.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox3.Location = new Point(-2, 0);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(487, 221);
+            pictureBox3.TabIndex = 12;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click_1;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.BackgroundImage = Properties.Resources.wall;
+            pictureBox4.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox4.Location = new Point(-2, 218);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(487, 232);
+            pictureBox4.TabIndex = 13;
+            pictureBox4.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -207,6 +232,8 @@
             Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(pictureBox2);
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox4);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -217,6 +244,8 @@
             ((System.ComponentModel.ISupportInitialize)leftDoor_T).EndInit();
             ((System.ComponentModel.ISupportInitialize)rightDoor_T).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLogs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
         }
 
@@ -236,5 +265,7 @@
         private System.Windows.Forms.Timer timer2;
         private DataGridView dataGridViewLogs;
         private Button ClearAll;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
     }
 }
