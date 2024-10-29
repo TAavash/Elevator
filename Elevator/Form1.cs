@@ -93,7 +93,7 @@ namespace Elevator
 
             if (isDoorOpen)
             {
-                logEvents("Cannot move up, the damn door is still open!");
+                logEvents("Cannot move up, the door is still open!");
                 return;
             }
 
@@ -119,7 +119,7 @@ namespace Elevator
                     pictureBox1.Top = 0;
                     StopElevator();
                     currentFloor = 1;
-                    logEvents("Mathi pugyo");
+                    logEvents("First floor");
 
                     //button1.Enabled = true; // Enable the up button
                     //button2.Enabled = true; // Enable the down button
@@ -137,7 +137,7 @@ namespace Elevator
                     pictureBox1.Top = this.ClientSize.Height - pictureBox1.Height; // Stop at the bottom
                     StopElevator();
                     currentFloor = 0;
-                    logEvents("Rock Bottom");
+                    logEvents("Ground floor");
 
                     //button1.Enabled = true; // Enable the up button
                     //button2.Enabled = true; // Enable the down button
@@ -149,7 +149,7 @@ namespace Elevator
         {
             if (isDoorOpen)
             {
-                logEvents("Cannot move down; the damn door is still open!");
+                logEvents("Cannot move down; the door is still open!");
                 return;
             }
 
@@ -211,7 +211,7 @@ namespace Elevator
                 isClosing = false;
                 timer2.Start();
                 closeBtn.Enabled = false;
-                logEvents("Lift khulyo get in or get lost !!");
+                logEvents("Doors are open get in or get out !!");
             }
         }
 
@@ -223,7 +223,7 @@ namespace Elevator
                 isClosing = true;
                 timer2.Start();
                 openBtn.Enabled = false;
-                logEvents("Lift banda hudaixa, don't move !!");
+                logEvents("Lift closing, don't move !!");
             }
             else
             {
