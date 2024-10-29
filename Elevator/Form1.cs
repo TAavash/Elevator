@@ -8,6 +8,8 @@ namespace Elevator
         int liftSpeed = 5;
         bool isMovingUp = false;
         bool isMovingDown = false;
+        int currentFloor = 0; // Assuming ground floor is 0
+        int destinationFloor = -1;
 
         bool isClosing = false;
         bool isOpening = false;
@@ -26,11 +28,16 @@ namespace Elevator
             doorMaxOpenWidth = pictureBox1.Width / 2;
             dataGridViewLogs.ColumnCount = 2;
 
+
             dataGridViewLogs.Columns[0].Name = "Time";
             dataGridViewLogs.Columns[1].Name = "Events";
 
             dt.Columns.Add("Time");
             dt.Columns.Add("Events");
+
+            // Assign event handlers
+            button2.Click += (sender, e) => CallLift(1);
+            button1.Click += (sender, e) => CallLift(0);
 
         }
         private void logEvents(string message)
@@ -47,12 +54,41 @@ namespace Elevator
             DBcontext.loadLogsFromDB(dt, dataGridViewLogs);
         }
 
+        private void CallLift(int floorCallingFrom)
+        {
+            if (currentFloor == floorCallingFrom)
+            {
+                logEvents("Lift is already on the current floor.");
+                return;
+            }
+
+            if (isDoorOpen)
+            {
+                logEvents("Cannot move the lift; the doors are open.");
+                return;
+            }
+
+            destinationFloor = floorCallingFrom;
+            if (currentFloor < destinationFloor)
+            {
+                isMovingUp = true;
+                isMovingDown = false;
+            }
+            else
+            {
+                isMovingDown = true;
+                isMovingUp = false;
+            }
+
+            timer1.Start();
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
 
             if (isDoorOpen)
@@ -82,6 +118,7 @@ namespace Elevator
                 {
                     pictureBox1.Top = 0;
                     StopElevator();
+                    currentFloor = 1;
                     logEvents("Mathi pugyo");
 
                     //button1.Enabled = true; // Enable the up button
@@ -99,6 +136,7 @@ namespace Elevator
                 {
                     pictureBox1.Top = this.ClientSize.Height - pictureBox1.Height; // Stop at the bottom
                     StopElevator();
+                    currentFloor = 0;
                     logEvents("Rock Bottom");
 
                     //button1.Enabled = true; // Enable the up button
@@ -107,7 +145,7 @@ namespace Elevator
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void button2_Click(object sender, EventArgs e)
         {
             if (isDoorOpen)
             {
@@ -133,6 +171,12 @@ namespace Elevator
             timer1.Stop();
             button1.Enabled = true;
             button2.Enabled = true;
+
+            // Automatically open doors after stopping
+            isOpening = true;
+            isClosing = false;
+            timer2.Start();
+            logEvents("Lift stopped, doors are opening automatically.");
         }
 
         private void pictureBox3_Click(object sender, EventArgs e)
@@ -279,6 +323,18 @@ namespace Elevator
         private void pictureBox3_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void callUp_Click(object sender, EventArgs e)
+        {
+            button1_Click(sender, e);
+            //timer1.Start();
+        }
+
+        private void callDown_Click(object sender, EventArgs e)
+        {
+            button2_Click(sender, e);
+            //timer1.Start();
         }
     }
 }

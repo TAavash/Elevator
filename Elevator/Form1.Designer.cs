@@ -45,6 +45,8 @@
             ClearAll = new Button();
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
+            callUp = new Button();
+            callDown = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)rightDoor_G).BeginInit();
@@ -58,7 +60,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.liftopen;
+            pictureBox1.BackgroundImage = Properties.Resources.Pika_Lift;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox1.Location = new Point(63, 275);
             pictureBox1.Name = "pictureBox1";
@@ -215,11 +217,35 @@
             pictureBox4.TabIndex = 13;
             pictureBox4.TabStop = false;
             // 
+            // callUp
+            // 
+            callUp.BackgroundImage = Properties.Resources.Screenshot_2024_10_29_100926;
+            callUp.BackgroundImageLayout = ImageLayout.Stretch;
+            callUp.Location = new Point(12, 85);
+            callUp.Name = "callUp";
+            callUp.Size = new Size(37, 31);
+            callUp.TabIndex = 14;
+            callUp.UseVisualStyleBackColor = true;
+            callUp.Click += callUp_Click;
+            // 
+            // callDown
+            // 
+            callDown.BackgroundImage = Properties.Resources.Screenshot_2024_10_29_100916;
+            callDown.BackgroundImageLayout = ImageLayout.Stretch;
+            callDown.Location = new Point(12, 344);
+            callDown.Name = "callDown";
+            callDown.Size = new Size(37, 34);
+            callDown.TabIndex = 15;
+            callDown.UseVisualStyleBackColor = true;
+            callDown.Click += callDown_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(callDown);
+            Controls.Add(callUp);
             Controls.Add(ClearAll);
             Controls.Add(dataGridViewLogs);
             Controls.Add(rightDoor_T);
@@ -267,5 +293,7 @@
         private Button ClearAll;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
+        private Button callUp;
+        private Button callDown;
     }
 }

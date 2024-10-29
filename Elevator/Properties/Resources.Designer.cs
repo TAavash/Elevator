@@ -103,6 +103,16 @@ namespace Elevator.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Pika_Lift {
+            get {
+                object obj = ResourceManager.GetObject("Pika Lift", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Screenshot_2024_10_18_074020 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot 2024-10-18 074020", resourceCulture);
@@ -146,6 +156,26 @@ namespace Elevator.Properties {
         internal static System.Drawing.Bitmap Screenshot_2024_10_18_080230 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot 2024-10-18 080230", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2024_10_29_100916 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2024-10-29 100916", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2024_10_29_100926 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2024-10-29 100926", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
